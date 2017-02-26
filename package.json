@@ -1,0 +1,22 @@
+{
+  "name": "book-keeping-app",
+  "version": "1.0.0",
+  "description": "app to keep track of books i read",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blacksmith4393/book-keeping-app.git"
+  },
+  "author": "Zach Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blacksmith4393/book-keeping-app/issues"
+  },
+  "homepage": "https://github.com/blacksmith4393/book-keeping-app#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
