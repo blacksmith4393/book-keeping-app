@@ -1,6 +1,6 @@
 var addBookButton = document.getElementById('addBookButton');
 var bookList = document.getElementById('bookList');
-var Mustache = require('mustache');
+var template = document.getElementById('template').innerHTML;
 
 var Book = function(){
   this.title = '';
@@ -23,22 +23,17 @@ var bookLibrary = {
     Object.keys(newBook).forEach(function(key, index){
       newBook[key] = bookInfo[index];
     });
+    if (this.books[0]) {
+      newBook.id = this.books[0].id + 1;
+    } else {
+      newBook.id = 1;
+    }
+
     this.books.unshift(newBook);
     this.renderBooks();
   },
   renderBooks: function(){
-    while (bookList.hasChildNodes()) {
-    bookList.removeChild(bookList.lastChild);
-    }
-    this.books.forEach(function(book){
-      //console.log(book);
-      let li = document.createElement('li');
-      li.className="list-group-item";
-      let h4 = document.createElement('h4');
-      h4.innerHTML = book.title;
-      li.appendChild(h4);
-      bookList.appendChild(li);
-    });
+    bookList.innerHTML = Mustache.render(template, bookLibrary);
   }
 };
 
