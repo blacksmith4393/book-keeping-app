@@ -32,6 +32,13 @@ var bookLibrary = {
     this.books.unshift(newBook);
     this.renderBooks();
   },
+  deleteBook: function(){
+
+
+    this.books = this.books.filter(function(object){
+      return element.title !== title;
+    });
+  },
   renderBooks: function(){
     bookList.innerHTML = Mustache.render(template, bookLibrary);
   }
