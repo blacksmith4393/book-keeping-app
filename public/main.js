@@ -33,11 +33,11 @@ var bookLibrary = {
     this.renderBooks();
   },
   deleteBook: function(){
-
-
-    this.books = this.books.filter(function(object){
+    console.log("function runs");
+    this.books = this.books.filter(function(element){
       return element.title !== title;
     });
+    this.renderBooks();
   },
   renderBooks: function(){
     bookList.innerHTML = Mustache.render(template, bookLibrary);
