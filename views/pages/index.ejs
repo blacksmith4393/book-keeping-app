@@ -2,10 +2,13 @@
 <html>
 
 <head>
-  <% include ../partials/header.ejs %>
+  <% include ../partials/head.ejs %>
 </head>
 
 <body>
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
 
   <div class="container">
     <h1> Book Keeper </h1>
@@ -38,14 +41,7 @@
       <div class="panel-body">
         <ul class="list-group" id="bookList">
           <script id="template" type="x-tmpl-mustache">
-            {{#books}}
-              <li class="list-group-item">
-                <h3 class="list-group-item-heading">Title: {{title}}</h3>
-                <p class="list-group-item-text">Author: {{author}}</p>
-                <p class="list-group-item-text">Rating: {{rating}}</p>
-                <button class="btn btn-default btn-primary" onclick="bookLibrary.deleteBook()">Delete</button>
-              </li>
-            {{/books}}
+
           </script>
         </ul>
       </div>
