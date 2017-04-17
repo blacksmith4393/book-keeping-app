@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <% include ../partials/head.ejs %>
 </head>
 
-<body>
+<body class="container-fluid">
   <header>
     <% include ../partials/header.ejs %>
   </header>
 
-  <div class="container">
+  <main class="container">
     <h1> Book Keeper </h1>
     <div class="jumbotron">
       <form id="addBookForm">
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label for="bookAuthor">Author:</label>
-          <input type="text" class="form-control" name="bookAuthor" id="bookAuthor" placeholder="Add Author..."required />
+          <input type="text" class="form-control" name="bookAuthor" id="bookAuthor" placeholder="Add Author..." required />
         </div>
         <div class="form-group">
           <label for="bookRating">Rating:</label>
@@ -33,7 +33,7 @@
         </div>
       </form>
     </div>
-    
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h2 class="panel-title">Book List</h2>
@@ -46,8 +46,8 @@
         </ul>
       </div>
     </div>
-  </div>
-  
+  </main>
+
 </body>
 
 </html>
