@@ -13,9 +13,6 @@ if(process.argv[2]){
 if(process.argv[3]){
   query.inauthor = process.argv[3];
 }
-if(process.argv[4]){
-  query.isbn = process.argv[4];
-}
 
 var searchQuery = qs.stringify(query,'+', ':');
 console.log(searchQuery);
