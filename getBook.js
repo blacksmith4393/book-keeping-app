@@ -1,8 +1,8 @@
 var https = require('https');
-var url = require('url');
+var URL = require('url');
 var qs = require('querystring');
 
-var sampleHref = 'https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&'+ KEY;
+var sampleUrl = 'https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&'+ KEY + 'maxResults=10' + '&fields=kind,items(volumeInfo)';
 
 var KEY = process.env.KEY;
 
@@ -17,7 +17,6 @@ if(process.argv[4]){
   query.isbn = process.argv[4];
 }
 
-
 var searchQuery = qs.stringify(query,'+', ':');
 console.log(searchQuery);
 
@@ -25,13 +24,12 @@ var options = {
   protocol: 'https:',
   slashes: true,
   hostname: 'www.googleapis.com',
-  search: '?q='+ searchQuery+ '&' + KEY,
+  search: '?q='+ searchQuery+ '&' + KEY + '&maxResults=10' + '&fields=kind,items(volumeInfo)' + '&printType=books',
   pathname: '/books/v1/volumes'
 };
 
-var href = url.format(options);
-
-console.log(href);
+var url = URL.format(options);
+console.log(url);
 
 function callback(response) {
   var data = [];
@@ -45,13 +43,13 @@ function callback(response) {
     response.on('end', function() {
       data = data.join('');
       data = JSON.parse(data);
-      console.log(data.items[0].volumeInfo);
+      console.log(data.items);
     });
     response.on('error', console.error);  
   }
 }
 
-var request = https.get(href, callback);
+var request = https.get(url, callback);
 
 request.on('error', (e) => {
   console.log(e.message);
