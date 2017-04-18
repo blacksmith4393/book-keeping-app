@@ -18,8 +18,12 @@ app.use(express.static(path.join(__dirname,'public')));
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
-app.get('/about', function(request, response) {
-  response.render('pages/about');
+app.get('/search', function(request, response) {
+  response.render('pages/search');
+});
+app.post('/search', function(request, response) {
+  console.log(request);
+  response.render('pages/search');
 });
 
 

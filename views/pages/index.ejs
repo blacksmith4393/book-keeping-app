@@ -2,51 +2,35 @@
 <html lang="en">
 
 <head>
-  <% include ../partials/head.ejs %>
+  <% include ../partials/head %>
 </head>
 
-<body class="container-fluid">
+<body>
+
   <header>
-    <% include ../partials/header.ejs %>
+    <% include ../partials/header %>
   </header>
 
   <main class="container">
-    <h1> Book Keeper </h1>
-    <div class="jumbotron">
-      <form id="addBookForm">
-        <div class="form-group">
-          <label for="bookTitle">Title:</label>
-          <input type="text" class="form-control" name="bookTitle" id="bookTitle" placeholder="Add Title..." required />
-        </div>
-        <div class="form-group">
-          <label for="bookAuthor">Author:</label>
-          <input type="text" class="form-control" name="bookAuthor" id="bookAuthor" placeholder="Add Author..." required />
-        </div>
-        <div class="form-group">
-          <label for="bookRating">Rating:</label>
-          <input type="text" class="form-control" name="bookRating" id="bookRating" placeholder="Add Rating..." required />
-        </div>
-        <div class="form-group">
-          <div>
-            <button type="button" class="btn btn-primary" id="addBookButton">Add</button>
-          </div>
-        </div>
-      </form>
-    </div>
+    <div class="row">
+      <div class="col-sm-8">
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Book List</h2>
+        <div class="jumbotron">
+          <h1>About</h1>
+          <p>This will be the landing page</p>
+        </div>
+
       </div>
-      <div class="panel-body">
-        <ul class="list-group" id="bookList">
-          <script id="template" type="x-tmpl-mustache">
+      <div class="col-sm-4">
 
-          </script>
-        </ul>
+        <div class="well">
+          <h3>Look I'm A Sidebar!</h3>
+        </div>
+
       </div>
     </div>
   </main>
+
 
 </body>
 

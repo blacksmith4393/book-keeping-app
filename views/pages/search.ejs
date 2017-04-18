@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+
+<body>
+
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main class="container">
+    <h1> Book Keeper </h1>
+    <div class="jumbotron">
+      <form id="searchForm">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" name="title" id="bookTitle" placeholder="Add Title..." required />
+        </div>
+        <div class="form-group">
+          <label for="author">Author:</label>
+          <input type="text" class="form-control" name="author" id="bookAuthor" placeholder="Add Author..." required />
+        </div>
+        <div class="form-group">
+          <div>
+            <button type="button" class="btn btn-primary" id="searchButton">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Search Results</h2>
+      </div>
+      <div class="panel-body">
+        <div id="results">
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script src="main.js"></script>
+</body>
+
+</html>
