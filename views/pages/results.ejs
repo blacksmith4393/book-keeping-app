@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+
+<body>
+
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main class="container">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Search Results</h2>
+      </div>
+      <div class="panel-body">
+        <div id="results">  
+          <% for(var i=0; i<items.length; i++){ %>
+            <p><%= items[i].title %></p>
+          <% } %>
+                    
+        </div>
+      </div>
+    </div>
+  </main>
+
+<!--<script src="main.js"></script>-->
+</body>
+
+</html>

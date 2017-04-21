@@ -14,7 +14,7 @@
   <main class="container">
     <h1> Book Keeper </h1>
     <div class="jumbotron">
-      <form id="searchForm">
+      <form id="searchForm" action='./results'>
         <div class="form-group">
           <label for="title">Title:</label>
           <input type="text" class="form-control" name="title" id="bookTitle" placeholder="Add Title..." required />
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
           <div>
-            <button type="button" class="btn btn-primary" id="searchButton">Search</button>
+            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
           </div>
         </div>
       </form>
