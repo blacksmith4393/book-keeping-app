@@ -38,6 +38,7 @@ var getBooks = function(title, author, callback){
     response.on('end', function() {
       data = data.join('');
       data = JSON.parse(data);
+      data = data.items;
       callback(data);
     });
   });

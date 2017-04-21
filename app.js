@@ -27,10 +27,7 @@ app.get('/results', function(request, response) {
   let author = request.query.author;
 
   getBooks(title, author, function(data){
-    let books = {
-      items: data.items
-    };
-    console.log(books);
+    let books = { items: data};
     response.render('pages/results', books);
   });
 });
