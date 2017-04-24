@@ -19,9 +19,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
-    "ejs": "^2.5.6",
+    "cors": "*",
     "express": "^4.14.1",
-    "mongoose": "^4.9.6"
+    "jsonwebtoken": "",
+    "mongoose": "^4.9.6",
+    "passport": "*",
+    "passport-jwt": ""
   },
   "devDependencies": {
     "eslint": "^3.19.0"
