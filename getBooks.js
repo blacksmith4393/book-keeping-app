@@ -27,8 +27,6 @@ var getBooks = function(title, author, callback){
 
   var url = URL.format(options);
 
-  var books;
-  
   var request = https.get(url, function (response) {
     var data = [];
     response.setEncoding('utf8');
@@ -45,7 +43,7 @@ var getBooks = function(title, author, callback){
   request.on('error', (e) => {
     console.error(e);
   });
-  request.end(books);
+  request.end();
 };
 
 
