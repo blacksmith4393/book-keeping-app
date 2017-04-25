@@ -3,6 +3,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+
 const getBooks = require('./getBooks');
 const users = require('./app/routes/users');
 const database = require('./config/database');
@@ -19,17 +22,23 @@ mongoose.connection.on('error', (err) => {
   console.log('database error:' + err);
 });
 
-//APP CONFIGURATION ======================================
+// APP CONFIGURATION =====================================
 
 // set port
 app.set('port', (process.env.PORT) || 5000);
+
+// set static files location
+app.use(express.static(path.join(__dirname,'public')));
 
 // set up body-parser middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// set static files location
-app.use(express.static(path.join(__dirname,'public')));
+// set up passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 app.use('/users', users);
 
