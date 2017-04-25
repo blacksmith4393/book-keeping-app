@@ -5,11 +5,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 const getBooks = require('./getBooks');
 const users = require('./app/routes/users');
 const database = require('./config/database');
-const mongoose = require('mongoose');
 
 const app = express();
 
@@ -26,6 +26,9 @@ mongoose.connection.on('error', (err) => {
 
 // set port
 app.set('port', (process.env.PORT) || 5000);
+
+// CORS Middleware
+app.use(cors());
 
 // set static files location
 app.use(express.static(path.join(__dirname,'public')));

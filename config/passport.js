@@ -1,10 +1,11 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const database = require('./database');
+const database = require('../config/database');
 const User = require('../app/models/user');
 
 
 module.exports = function(passport) {
+  console.log('test');
   let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeader(); 
   opts.secretOrKey = database.secret;

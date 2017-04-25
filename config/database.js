@@ -1,4 +1,4 @@
 module.exports = {
   url: 'mongodb://localhost:27017/books-app',
-  secret: 'secret'
+  secret: 'mysecret'
 };

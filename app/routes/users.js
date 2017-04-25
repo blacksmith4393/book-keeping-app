@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user.js');
+const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const database = require('../../config/database');
+const User = require('../models/user.js');
 
 router.post('/register', function(req, res, next) {
   let newUser = new User({
@@ -37,7 +38,7 @@ router.post('/authenticate', function(req, res, next) {
         });
         res.json({
           success: true,
-          token: 'JWT ' + token,
+          token: token,
           user: {
             id: user._id,
             name: user.name,
@@ -51,8 +52,8 @@ router.post('/authenticate', function(req, res, next) {
     });
   });
 });
-router.get('/profile', function(req, res, next) {
-  res.send('PROFILE');
+router.get('/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  res.json({user: req.user});
 });
 
 
