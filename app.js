@@ -33,22 +33,6 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/users', users);
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
-app.get('/search', function(request, response) {
-  response.render('pages/search');
-});
-app.get('/results', function(request, response) {
-  let title = request.query.title;
-  let author = request.query.author;
-
-  getBooks(title, author, function(data){
-    let books = { items: data};
-    response.render('pages/results', books);
-  });
-});
-
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
