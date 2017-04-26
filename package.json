@@ -1,7 +1,7 @@
 {
   "name": "book-keeping-app",
   "version": "1.0.0",
-  "description": "app to keep track of books i read",
+  "description": "App to keep track of books I read",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,8 +17,16 @@
   },
   "homepage": "https://github.com/blacksmith4393/book-keeping-app#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
+    "cors": "*",
     "express": "^4.14.1",
-    "mustache": "^2.3.0"
+    "jsonwebtoken": "*",
+    "mongoose": "^4.9.6",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
   }
 }

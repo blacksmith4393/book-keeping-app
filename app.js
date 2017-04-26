@@ -1,19 +1,50 @@
+
+// MODULES ===============================================
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+const mongoose = require('mongoose');
 
+const getBooks = require('./getBooks');
+const users = require('./app/routes/users');
+const database = require('./config/database');
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+// CONNECT TO DATABASE ===================================
+mongoose.connect(database.url);
+mongoose.connection.on('connected', () => {
+  console.log('connected to database:' + database.url);
+});
+mongoose.connection.on('error', (err) => {
+  console.log('database error:' + err);
+});
 
+// APP CONFIGURATION =====================================
+
+// set port
+app.set('port', (process.env.PORT) || 5000);
+
+// CORS Middleware
+app.use(cors());
+
+// set static files location
 app.use(express.static(path.join(__dirname,'public')));
 
-// app.get('/', function (req, res) {
-//   res.render('index');
-// });
+// set up body-parser middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-app.listen(3000, function(){
-  console.log('app listening on port 3000');
+// set up passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+app.use('/users', users);
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
