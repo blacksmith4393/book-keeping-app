@@ -5,7 +5,6 @@ const User = require('../app/models/user');
 
 
 module.exports = function(passport) {
-  console.log('test');
   let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeader(); 
   opts.secretOrKey = database.secret;

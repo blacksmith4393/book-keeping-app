@@ -1,19 +1,17 @@
-var https = require('https');
-var URL = require('url');
-var qs = require('querystring');
+const https = require('https');
+const URL = require('url');
+const qs = require('querystring');
 
-// var sampleUrl = 'https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&'+ KEY + 'maxResults=10' + '&fields=kind,items(volumeInfo)';
-
-var KEY = process.env.KEY;
+const KEY = process.env.KEY;
 
 function getQuery( titleStr, authorStr ){
-  var queryParams = {};
+  let queryParams = {};
   queryParams.intitle = titleStr;
   queryParams.inauthor = authorStr;
   return qs.stringify(queryParams,'+', ':');
 }
 
-var getBooks = function(title, author, callback){
+const getBooks = function(title, author, callback){
 
   var query = getQuery(title, author);
 
@@ -21,23 +19,34 @@ var getBooks = function(title, author, callback){
     protocol: 'https:',
     slashes: true,
     hostname: 'www.googleapis.com',
-    search: '?q='+ query+ '&' + KEY + '&maxResults=10' + '&fields=kind,items(volumeInfo)' + '&printType=books',
+    search: '?q='+ query+ '&' + 'key='+ KEY + '&maxResults=10' + '&fields=kind,items(volumeInfo)' + '&printType=books',
     pathname: '/books/v1/volumes'
   };
 
-  var url = URL.format(options);
+  const url = URL.format(options);
+  console.log(url);
 
-  var request = https.get(url, function (response) {
-    var data = [];
+  const request = https.get(url, function (response) {
+    let error;
+
+    if (response.statusCode !== 200) {
+      error = new Error(`Request Failed. Status Code: ${response.statusCode}`);
+    } 
+    if (error) {
+      callback(error);
+      return;
+    }
+
     response.setEncoding('utf8');
+    let rawData = [];
     response.on('data', (chunk) => {
-      data.push(chunk);
+      rawData.push(chunk);
     });
     response.on('end', function() {
-      data = data.join('');
-      data = JSON.parse(data);
-      data = data.items;
-      callback(data);
+      rawData = rawData.join('');
+      let data = JSON.parse(rawData);
+      callback(null, data);
+      return;
     });
   });
   request.on('error', (e) => {
@@ -45,6 +54,5 @@ var getBooks = function(title, author, callback){
   });
   request.end();
 };
-
 
 var exports = module.exports = getBooks;

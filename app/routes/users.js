@@ -4,6 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const database = require('../../config/database');
 const User = require('../models/user.js');
+const getBooks = require('../../getBooks');
 
 router.post('/register', function(req, res, next) {
   let newUser = new User({
@@ -52,9 +53,20 @@ router.post('/authenticate', function(req, res, next) {
     });
   });
 });
+
 router.get('/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   res.json({user: req.user});
 });
 
+router.post('/results', passport.authenticate('jwt', {session: false}), function(req, res, next){
+  let title = req.body.title;
+  let author = req.body.author;
+  getBooks(title, author, (err, data) => {
+    if(err) {
+      res.send(err.message);
+    }
+    res.send(data);
+  });
+});
 
 module.exports = router;
