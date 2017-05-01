@@ -7,7 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const getBooks = require('./getBooks');
+const getBooks = require('./app/getBooks');
 const users = require('./app/routes/users');
 const database = require('./config/database');
 
