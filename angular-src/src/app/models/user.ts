@@ -1,8 +1,11 @@
 export class User {
-  public name: String;
-  public username: String;
-  public email: String;
-  public password: String;
+  _id: string;
+  name: String;
+  username: String;
+  email: String;
+  password: String;
   
-  constructor( ) { }
+  constructor( 
+    
+  ) { }
 }

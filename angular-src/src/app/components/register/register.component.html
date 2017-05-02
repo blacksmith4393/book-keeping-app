@@ -1,28 +1,28 @@
 
 <h2 class="page-header">Register</h2>
-<form (submit)="onRegisterSubmit()" class="form-horizontal">
+<form #f="ngForm" (ngSubmit)="onRegisterSubmit()" >
     <div class="form-group">
       <label for="inputName" class="col-lg-2 control-label">Name</label>
       <div class="col-lg-10">
-        <input type="text" [(ngModel)]="name" name="name" class="form-control" id="inputName" placeholder="Name">
+        <input #test type="text" [(ngModel)]="model.name" name="name" class="form-control" id="inputName" placeholder="Name">
       </div>
     </div>
     <div class="form-group">
       <label for="inputUsername" class="col-lg-2 control-label">Username</label>
       <div class="col-lg-10">
-        <input type="text" [(ngModel)]="username" name="username" class="form-control" id="inputUsername" placeholder="Username">
+        <input type="text" [(ngModel)]="model.username" name="username" class="form-control" id="inputUsername" placeholder="Username" required>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Email</label>
       <div class="col-lg-10">
-        <input type="text" [(ngModel)]="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+        <input type="text" [(ngModel)]="model.email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
       </div>
     </div>
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label">Password</label>
       <div class="col-lg-10">
-        <input type="password" [(ngModel)]="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+        <input type="password" [(ngModel)]="model.password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
       </div>
     </div>
     <div class="form-group">
@@ -31,3 +31,5 @@
       </div>
     </div>
 </form>
+{{diagnostic}}
+<br>TODO: remove this: {{test.className}}

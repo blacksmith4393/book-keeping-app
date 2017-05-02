@@ -8,10 +8,18 @@ import { User } from '../../models/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  submitted = false;
+  model = new User();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.submitted = true;
+  }
+
+  // TODO: Remove this
+  get diagnostic() { return JSON.stringify(this.model); }
 }
