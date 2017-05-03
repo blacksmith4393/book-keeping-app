@@ -13,7 +13,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class RegisterComponent implements OnInit {
   submitted = false;
-  newUser = new User();
+  newUser: any = {};
 
   constructor(
     private router: Router,
@@ -39,10 +39,10 @@ export class RegisterComponent implements OnInit {
       data => {
         if(data.success){
           this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 1500});
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
         } else {
           this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 2000});
-          this.router.navigate(['/register']);
+          this.router.navigate(['register']);
         }
       }
     );

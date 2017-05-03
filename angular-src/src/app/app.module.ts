@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
 import { AppConfig } from './app.config';
 
@@ -40,7 +41,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, ValidationService, AppConfig],
+  providers: [UserService, AuthService, ValidationService, AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
