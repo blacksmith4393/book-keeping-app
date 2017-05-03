@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { AppConfig } from '../app.config';
@@ -22,7 +20,7 @@ export class UserService {
   // }
 
   create(user: User) {
-    return this.http.post(this.config.apiUrl + '/users/register', user, this.jwt());
+    return this.http.post(this.config.apiUrl + '/users/register', user, this.jwt()).map(res => res.json());
   }
 
   // update(user: User) {
