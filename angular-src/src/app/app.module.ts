@@ -12,9 +12,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { UserService } from './services/user.service';
+import { AppConfig } from './app.config';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent},
+  { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'Profile', component: ProfileComponent},
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService],
+  providers: [UserService, AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
