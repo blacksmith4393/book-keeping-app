@@ -25,5 +25,16 @@ export class AuthService {
     this.authToken = token;
     this.user = user;    
   }
+  getProfile(){
+    let headers = new Headers();
+    this.getToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Conten-Type', 'application/json');
+    return this.http.get(this.config.apiUrl + '/users/profile',{headers: headers})
+      .map(res => res.json());
+  }
 
+  getToken(){
+    this.authToken = localStorage.getItem('id_token');
+  }
 }
