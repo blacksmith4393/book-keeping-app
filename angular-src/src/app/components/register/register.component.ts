@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { ValidationService } from '../../services/validation.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
+    private auth: AuthService,
     private flashMessage: FlashMessagesService,
     private validationService: ValidationService
   ) { }
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       return false;
     }
     
-    this.userService.create(this.newUser).subscribe(
+    this.auth.registerUser(this.newUser).subscribe(
       data => {
         if(data.success){
           this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 1500});

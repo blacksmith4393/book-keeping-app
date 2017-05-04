@@ -9,14 +9,25 @@ import { AppConfig } from '../app.config';
 export class AuthService {
   authToken: string;
   user: string;
-  constructor(
-    private http: Http, private config: AppConfig
-  ) { }
+  isDev: boolean;
+
+  constructor(private http: Http) {
+    this.isDev = true;
+  }
+
+  registerUser(user){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('users/register');
+    return this.http.post(ep, user,{headers: headers})
+      .map(res => res.json());
+  }
 
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
-    return this.http.post(this.config.apiUrl + '/users/authenticate', user,{headers: headers})
+    let ep = this.prepEndpoint('users/authenticate');
+    return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -26,12 +37,14 @@ export class AuthService {
     this.authToken = token;
     this.user = user;    
   }
+
   getProfile(){
     let headers = new Headers();
     this.getToken();
     headers.append('Authorization', this.authToken);
     headers.append('Conten-Type', 'application/json');
-    return this.http.get(this.config.apiUrl + '/users/profile',{headers: headers})
+    let ep = this.prepEndpoint('users/profile');
+    return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
 
@@ -48,4 +61,12 @@ export class AuthService {
   loggedIn(){
     return tokenNotExpired('token');
   }
+
+  prepEndpoint(ep){
+    if(this.isDev){
+      return ep;
+    } else {
+      return 'http://localhost:5000/'+ep;
+    }
+  }  
 }
