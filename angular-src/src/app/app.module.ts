@@ -16,12 +16,13 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
 import { AppConfig } from './app.config';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   { path: '**', redirectTo: '' }
 ];
 
@@ -41,7 +42,12 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthService, ValidationService, AppConfig],
+  providers: [
+    UserService, 
+    AuthService, 
+    ValidationService, 
+    AuthGuard,
+    AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

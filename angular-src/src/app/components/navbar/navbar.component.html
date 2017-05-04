@@ -17,8 +17,10 @@
         <li routerLinkActive="active"><a routerLink="/home" (click)="toggleState()">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a routerLink="/login" (click)="toggleState()">Login</a></li>
-        <li routerLinkActive="active"><a routerLink="/register" (click)="toggleState()">Register</a></li>
+        <li *ngIf="auth.loggedIn()" routerLinkActive="active"><a routerLink="/profile" (click)="toggleState()">Profile</a></li>
+        <li *ngIf="auth.loggedIn()"><a href ="#" (click)="onLogoutClick()">Logout</a></li>
+        <li *ngIf="!auth.loggedIn()" routerLinkActive="active"><a routerLink="/login" (click)="toggleState()">Login</a></li>
+        <li *ngIf="!auth.loggedIn()" routerLinkActive="active"><a routerLink="/register" (click)="toggleState()">Register</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
