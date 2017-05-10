@@ -31,7 +31,7 @@ app.set('port', (process.env.PORT) || 5000);
 app.use(cors());
 
 // set static files location
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'public/angular')));
 
 // set up body-parser middleware
 app.use(bodyParser.urlencoded({extended: true}));
@@ -45,9 +45,9 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 
-app.get('*', (req, res) => {
-  res.sendfile(path.join(__dirname,'public/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'public/angular/index.html'));
+// });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
