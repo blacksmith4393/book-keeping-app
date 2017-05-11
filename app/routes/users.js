@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const database = require('../../config/database');
 const User = require('../models/user.js');
-const getBooks = require('../../getBooks');
+const getBooks = require('../getBooks');
 
 router.post('/register', function(req, res, next) {
   let newUser = new User({
@@ -41,7 +41,7 @@ router.post('/authenticate', function(req, res, next) {
           success: true,
           token: 'JWT ' + token,
           user: {
-            id: user._id,
+            _id: user._id,
             name: user.name,
             username: user.username,
             email: user.email,
@@ -58,14 +58,15 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), function(
   res.json({user: req.user});
 });
 
-router.post('/results', passport.authenticate('jwt', {session: false}), function(req, res, next){
-  let title = req.body.title;
-  let author = req.body.author;
+router.get('/search', passport.authenticate('jwt', {session: false}), function(req, res, next){
+  let title = req.query.title;
+  let author = req.query.author;
   getBooks(title, author, (err, data) => {
     if(err) {
       res.send(err.message);
+    } else {
+      res.send(data);
     }
-    res.send(data);
   });
 });
 

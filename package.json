@@ -21,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
     "cors": "*",
+    "dotenv": "^4.0.0",
     "express": "^4.14.1",
     "jsonwebtoken": "*",
     "mongoose": "^4.9.6",
