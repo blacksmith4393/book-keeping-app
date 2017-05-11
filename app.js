@@ -45,9 +45,9 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname,'public/angular/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'public/angular/index.html'));
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
