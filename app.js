@@ -7,7 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const getBooks = require('./getBooks');
+const getBooks = require('./app/getBooks');
 const users = require('./app/routes/users');
 const database = require('./config/database');
 
@@ -31,10 +31,10 @@ app.set('port', (process.env.PORT) || 5000);
 app.use(cors());
 
 // set static files location
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'public/angular')));
 
 // set up body-parser middleware
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // set up passport middleware
@@ -44,6 +44,10 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/users', users);
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'public/angular/index.html'));
+// });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
