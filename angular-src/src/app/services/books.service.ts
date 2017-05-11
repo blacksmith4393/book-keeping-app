@@ -20,7 +20,6 @@ export class BooksService {
     private http: Http,
     private auth: AuthService
   ) {
-    this.isDev = false;
   }
 
   searchBooks(search): Observable<any>{
@@ -38,6 +37,7 @@ export class BooksService {
     requestOptions.headers = headers;
     
     let ep = this.auth.prepEndpoint('users/search');
+    console.log(ep);
 
     return this.http.get(ep, requestOptions)
       .map(res => res.json());
