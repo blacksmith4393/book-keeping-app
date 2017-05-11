@@ -58,14 +58,15 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), function(
   res.json({user: req.user});
 });
 
-router.post('/results', passport.authenticate('jwt', {session: false}), function(req, res, next){
-  let title = req.body.title;
-  let author = req.body.author;
+router.get('/search', passport.authenticate('jwt', {session: false}), function(req, res, next){
+  let title = req.query.title;
+  let author = req.query.author;
   getBooks(title, author, (err, data) => {
     if(err) {
       res.send(err.message);
+    } else {
+      res.send(data);
     }
-    res.send(data);
   });
 });
 

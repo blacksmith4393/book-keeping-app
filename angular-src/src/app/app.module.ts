@@ -1,28 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
+import { SearchComponent } from './components/search/search.component';
 
-import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
-import { ValidationService } from './services/validation.service';
 import { AppConfig } from './app.config';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
+import { BooksService } from './services/books.service';
+import { UserService } from './services/user.service';
+import { ValidationService } from './services/validation.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+  { path: 'search', component: SearchComponent},
   { path: '**', redirectTo: '' }
 ];
 
@@ -33,7 +38,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,8 @@ const appRoutes: Routes = [
     AuthService, 
     ValidationService, 
     AuthGuard,
-    AppConfig],
+    AppConfig, 
+    BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

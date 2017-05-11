@@ -12,7 +12,7 @@ export class AuthService {
   isDev: boolean;
 
   constructor(private http: Http) {
-    this.isDev = true;
+    this.isDev = false;
   }
 
   registerUser(user){
@@ -42,7 +42,7 @@ export class AuthService {
     let headers = new Headers();
     this.getToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Conten-Type', 'application/json');
+    headers.append('Content-Type', 'application/json');
     let ep = this.prepEndpoint('users/profile');
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
@@ -50,6 +50,7 @@ export class AuthService {
 
   getToken(){
     this.authToken = localStorage.getItem('token');
+    return this.authToken;
   }
 
   logout(){

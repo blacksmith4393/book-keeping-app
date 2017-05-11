@@ -34,7 +34,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname,'public/angular')));
 
 // set up body-parser middleware
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // set up passport middleware

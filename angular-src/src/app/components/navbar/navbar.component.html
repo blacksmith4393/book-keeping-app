@@ -17,6 +17,7 @@
         <li routerLinkActive="active"><a routerLink="/home" (click)="toggleState()">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="auth.loggedIn()" routerLinkActive="active"><a routerLink="/search" (click)="toggleState()">Search</a></li>
         <li *ngIf="auth.loggedIn()" routerLinkActive="active"><a routerLink="/profile" (click)="toggleState()">Profile</a></li>
         <li *ngIf="auth.loggedIn()"><a href ="#" (click)="onLogoutClick()">Logout</a></li>
         <li *ngIf="!auth.loggedIn()" routerLinkActive="active"><a routerLink="/login" (click)="toggleState()">Login</a></li>
