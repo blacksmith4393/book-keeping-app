@@ -65,9 +65,9 @@ export class AuthService {
 
   prepEndpoint(ep){
     if(this.isDev){
-      return ep;
-    } else {
       return 'http://localhost:5000/'+ep;
+    } else {
+      return ep;
     }
   }  
 }
