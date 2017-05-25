@@ -829,7 +829,7 @@ module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash
 /***/ 180:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\n  <h1>My First MEAN Application</h1>\n  <p>This is my first application using the MEAN stack.</p>\n  <div>\n    <a class=\"btn btn-primary\" routerLink=\"/register\">Register</a>\n    <a class=\"btn btn-primary\" routerLink=\"/login\">Login</a>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Node and Express</h3>\n    <p>This project implements server using Node.js using the Express framework</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>MongoDB and Mongoose</h3>\n    <p>The server interfaces with a Mongodb database using MongooseJS as an ORM</p>\n  </div>\n    <div class=\"col-md-4\">\n    <h3>Angular 2</h3>\n    <p>The client side is written using Angular 2 and the Angular CLI.</p>\n  </div>\n</div>"
+module.exports = "<div class=\"jumbotron text-center\">\n  <h1>My First MEAN Application</h1>\n  <p>This is my first application using the MEAN stack.</p>\n  <div>\n    <a class=\"btn btn-primary\" routerLink=\"/register\">Register</a>\n    <a class=\"btn btn-primary\" routerLink=\"/login\">Login</a>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Node and Express</h3>\n    <p>This project implements a server using Node.JS and the Express.JS framework</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>MongoDB and Mongoose</h3>\n    <p>The server interfaces with a Mongodb database using Mongoose as a helper library.</p>\n  </div>\n    <div class=\"col-md-4\">\n    <h3>Angular 2</h3>\n    <p>The client side is written using Angular 2 and the Angular CLI.</p>\n  </div>\n</div>"
 
 /***/ }),
 
