@@ -8,18 +8,18 @@ const KEY = process.env.KEY;
 
 function getQuery( title, author ){
   let queryParams = {};
-  if(title){
+  if( title ){
     queryParams.intitle = title;
   }
-  if(author){
+  if( author ){
     queryParams.inauthor = author;
   }
   return qs.stringify(queryParams,'+', ':');
 }
 
-const getBooks = function(title, author, callback){
+const getBooks = function( title, author, callback ){
 
-  var query = getQuery(title, author);
+  var query = getQuery( title, author );
 
   var options = {
     protocol: 'https:',
@@ -29,30 +29,30 @@ const getBooks = function(title, author, callback){
     pathname: '/books/v1/volumes'
   };
 
-  const url = URL.format(options);
-  console.log(url);
+  const url = URL.format( options) ;
+  console.log( url );
 
-  const request = https.get(url, function (response) {
+  const request = https.get( url, function (response) {
     let error = null;
 
-    if (response.statusCode !== 200) {
+    if ( response.statusCode !== 200 ) {
       error = new Error(`Request Failed. Status Code: ${response.statusCode}`);
       return callback(error);
     }
 
-    response.setEncoding('utf8');
+    response.setEncoding( 'utf8' );
 
     let rawData = [];
-    response.on('data', (chunk) => {
-      rawData.push(chunk);
+    response.on( 'data', ( chunk ) => {
+      rawData.push( chunk );
     });
-    response.on('end', function() {
+    response.on( 'end', function() {
       rawData = rawData.join('');
       let data = rawData;
-      return callback(null, data);
+      return callback( null, data );
     });
   });
-  request.on('error', (e) => {
+  request.on( 'error', (e) => {
     console.error(e);
   });
   request.end();
