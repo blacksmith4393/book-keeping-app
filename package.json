@@ -29,6 +29,8 @@
     "passport-jwt": "*"
   },
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "mocha": "^3.4.2"
   }
 }
