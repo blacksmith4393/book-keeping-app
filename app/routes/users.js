@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const database = require('../../config/database');
 const User = require('../models/user.js');
-const getBooks = require('../getBooks');
+const getBooks = require('../get-books');
 
 router.post('/register', function(req, res, next) {
   let newUser = new User({

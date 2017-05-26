@@ -2,26 +2,27 @@ const https = require('https');
 const URL = require('url');
 const qs = require('querystring');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const KEY = process.env.KEY;
 
-function getQuery( title, author ){
+function getQuery( title, author ) {
   let queryParams = {};
-  if( title ){
+  if ( title ) {
     queryParams.intitle = title;
   }
-  if( author ){
+  if ( author ) {
     queryParams.inauthor = author;
   }
   return qs.stringify(queryParams,'+', ':');
 }
 
-const getBooks = function( title, author, callback ){
+const getBooks = function ( title, author, callback ) {
 
-  var query = getQuery( title, author );
+  const query = getQuery( title, author );
 
-  var options = {
+  const options = {
     protocol: 'https:',
     slashes: true,
     hostname: 'www.googleapis.com',
@@ -29,8 +30,7 @@ const getBooks = function( title, author, callback ){
     pathname: '/books/v1/volumes'
   };
 
-  const url = URL.format( options) ;
-  console.log( url );
+  const url = URL.format(options) ;
 
   const request = https.get( url, function (response) {
     let error = null;
@@ -47,8 +47,7 @@ const getBooks = function( title, author, callback ){
       rawData.push( chunk );
     });
     response.on( 'end', function() {
-      rawData = rawData.join('');
-      let data = rawData;
+      let data = rawData.join('');
       return callback( null, data );
     });
   });
@@ -58,4 +57,4 @@ const getBooks = function( title, author, callback ){
   request.end();
 };
 
-var exports = module.exports = getBooks;
+exports = module.exports = getBooks;
