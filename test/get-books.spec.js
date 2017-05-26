@@ -19,7 +19,7 @@ describe('getBooks', function() {
       const parsedData = JSON.parse(data);
       assert.equal( null, err );
       assert.equal( 'object', typeof parsedData);
-      assert.equal( true, parsedData.hasOwnProperty('items') );
+      assert.equal( true, parsedData.items.constructor === Array );
       done();
     });
   });
