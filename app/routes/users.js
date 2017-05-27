@@ -6,7 +6,7 @@ const database = require('../../config/database');
 const User = require('../models/user.js');
 const getBooks = require('../get-books');
 
-router.post('/register', function(req, res, next) {
+router.post('/', function(req, res, next) {
   let newUser = new User({
     name: req.body.name,
     email: req.body.email,
@@ -22,7 +22,7 @@ router.post('/register', function(req, res, next) {
   });
 });
 
-router.post('/authenticate', function(req, res, next) {
+router.post('/user', function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
   User.getUserByUsername(username, (err, user) => {
@@ -54,20 +54,20 @@ router.post('/authenticate', function(req, res, next) {
   });
 });
 
-router.get('/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.get('/user/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   res.json({user: req.user});
 });
 
-router.get('/search', passport.authenticate('jwt', {session: false}), function(req, res, next){
-  let title = req.query.title;
-  let author = req.query.author;
-  getBooks(title, author, (err, data) => {
-    if(err) {
-      res.send(err.message);
-    } else {
-      res.send(data);
-    }
-  });
-});
+// router.get('/search', passport.authenticate('jwt', {session: false}), function(req, res, next){
+//   let title = req.query.title;
+//   let author = req.query.author;
+//   getBooks(title, author, (err, data) => {
+//     if(err) {
+//       res.send(err.message);
+//     } else {
+//       res.send(data);
+//     }
+//   });
+// });
 
 module.exports = router;

@@ -10,15 +10,24 @@ require('dotenv').config();
 
 
 const users = require('./app/routes/users');
+const books = require('./app/routes/books');
 const database = require('./config/database');
 
 const app = express();
 
 // CONNECT TO DATABASE ===================================
-mongoose.connect(database.url);
-mongoose.connection.on('connected', () => {
-  console.log('connected to database:' + database.url);
-});
+if (process.argv[2] === 'dev'){
+  mongoose.connect(database.devUrl);
+  mongoose.connection.on('connected', () => {
+    console.log('connected to database:' + database.devUrl);
+  });
+} else {
+  mongoose.connect(database.url);
+  mongoose.connection.on('connected', () => {
+    console.log('connected to database:' + database.url);
+  });
+}
+
 mongoose.connection.on('error', (err) => {
   console.log('database error:' + err);
 });
@@ -45,6 +54,8 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/users', users);
+app.use('/books', books);
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname,'public/angular/index.html'));
@@ -53,3 +64,5 @@ app.get('*', (req, res) => {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+module.exports = app;

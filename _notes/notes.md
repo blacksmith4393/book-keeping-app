@@ -30,3 +30,13 @@
     * I will store user data using mongo. I will need a "User" model and "Book" model? The Book models saved by the user would would be stored in a property of the User.
 3. **_User Story 5 and 6:_**
     * Rating and Reviews will be saved to Book models in the Users list of saved Books.
+
+
+#### API Structure
+1. /users/
+    POST user
+
+2. /books/
+    GET get books
+    /books/:id
+    GET specific book data
