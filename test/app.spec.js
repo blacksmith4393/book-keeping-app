@@ -1,27 +1,27 @@
 const chai = require('chai');
 const expect = require('chai').expect;
-const assert = require('assert');
-const http = require('http');
+const request = require('supertest');
 
-const app = require('../app');
-const host = 'http://localhost:5000';
-
-describe('app', function () {
-  before(function () {
-    server.listen(8000);
+describe('loading express server', function () {
+  let server;
+  beforeEach(function () {
+    delete require.cache[require.resolve('../app')];
+    server = require('../app');
   });
 
-  after(function () {
+  afterEach(function (done) {
     server.close();
+    done();
   });
-});
 
-
-describe('/', function () {
-  it('should return 200', function (done) {
-    http.get(host, function (res) {
-      expect(res.statusCode).to.equal(200);
-      done();
-    });
+  it('responds to /', function testSlash(done) {
+    request(server)
+    .get('/')
+    .expect(200, done);
+  });
+  it('404 everything else', function testPath(done) {
+    request(server)
+      .get('/foo/bar')
+      .expect(404, done);
   });
 });
