@@ -18,14 +18,14 @@ const app = express();
 // CONNECT TO DATABASE ===================================
 if (process.argv[2] === 'dev'){
   mongoose.connect(database.devUrl);
-  mongoose.connection.on('connected', () => {
-    console.log('connected to database:' + database.devUrl);
-  });
+  // mongoose.connection.on('connected', () => {
+  //   console.log('connected to database:' + database.devUrl);
+  // });
 } else {
   mongoose.connect(database.url);
-  mongoose.connection.on('connected', () => {
-    console.log('connected to database:' + database.url);
-  });
+  // mongoose.connection.on('connected', () => {
+  //   console.log('connected to database:' + database.url);
+  // });
 }
 
 mongoose.connection.on('error', (err) => {

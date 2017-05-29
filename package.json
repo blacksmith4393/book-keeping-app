@@ -4,6 +4,7 @@
   "description": "App to keep track of books I read",
   "main": "app.js",
   "scripts": {
+    "eslint": "eslint --init",
     "test": "mocha",
     "start": "nodemon app.js",
     "start-dev": "nodemon app.js dev"
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "mocha": "^3.4.2",

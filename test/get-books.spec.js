@@ -13,8 +13,7 @@ describe('getBooks', function() {
     });
   });
 
-  it(`parsed string should be an object 
-      containing an array of book data objects`, function(done) {
+  it('parsed string should be an object containing an array of book data objects', function(done) {
     getBooks(title, author, (err, data) => {
       const parsedData = JSON.parse(data);
       assert.equal( null, err );

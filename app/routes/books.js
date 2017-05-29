@@ -1,18 +1,12 @@
 const express = require('express');
 const router = express.Router();
-// const passport = require('passport');
 const getBooks = require('../get-books');
+const Books = require('../controllers/books');
 
-router.get('/books', function(req, res, next){
-  let title = req.query.title;
-  let author = req.query.author;
-  getBooks(title, author, (err, data) => {
-    if(err) {
-      res.send(err.message);
-    } else {
-      res.send(data);
-    }
-  });
+router.get('/', function(req, res, next){
+  let title = req.params.title;
+  let author = req.params.author;
+  res.send('hello');
 });
 
 module.exports = router;
