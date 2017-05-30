@@ -17,7 +17,13 @@ router.post('/', function(req, res, next) {
     if(err) {
       res.json({ success: false, msg: 'Failed to register user'});
     } else {
-      res.json( {success: true, msg: 'User registered'});
+      res.json( 
+        {
+          success: true, 
+          msg: 'User registered',
+          _id: user._id,
+          username: user.username
+        });
     }
   });
 });
@@ -42,9 +48,7 @@ router.post('/user', function(req, res, next) {
           token: 'JWT ' + token,
           user: {
             _id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email,
+            username: user.username
           }
         });
       } else { 
@@ -54,8 +58,13 @@ router.post('/user', function(req, res, next) {
   });
 });
 
-router.get('/user/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-  res.json({user: req.user});
+router.get('/:username/profile', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  let username = req.params.id;
+  console.log(username);
+  User.getUserByUsername(username, function (err, user) {
+    if(err) throw err;
+    res.json(user);
+  });
 });
 
 // router.get('/search', passport.authenticate('jwt', {session: false}), function(req, res, next){

@@ -8,7 +8,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-
 const users = require('./app/routes/users');
 const books = require('./app/routes/books');
 const database = require('./config/database');
@@ -16,18 +15,8 @@ const database = require('./config/database');
 const app = express();
 
 // CONNECT TO DATABASE ===================================
-if (process.argv[2] === 'dev'){
-  mongoose.connect(database.devUrl);
-  // mongoose.connection.on('connected', () => {
-  //   console.log('connected to database:' + database.devUrl);
-  // });
-} else {
-  mongoose.connect(database.url);
-  // mongoose.connection.on('connected', () => {
-  //   console.log('connected to database:' + database.url);
-  // });
-}
-
+mongoose.Promise = global.Promise;
+mongoose.connect(database.url);
 mongoose.connection.on('error', (err) => {
   console.log('database error:' + err);
 });
