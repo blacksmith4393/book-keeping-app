@@ -5,6 +5,7 @@ const server = require('../app.js');
 const User = require('../app/models/user');
 const jwt = require('jsonwebtoken');
 const database = require('../config/database');
+const usersController = require('../app/controllers/users-controller');
 
 chai.use(chaiHttp);
 
@@ -111,14 +112,14 @@ describe('POST /users/user', function(){
       if (err) { console.log(err); }
     });
     
-    User.addUser(testUser, function (err, user) {
+    usersController.addUser(testUser, function (err, user) {
       if (err) { console.log(err); }
       testUser._id = user._id;
     });
     done();
   });
 
-  it('should authenticate respond with jwt, username and db id', function (done) {
+  it('should authenticate user and respond with jwt, username and db id', function (done) {
     chai.request(server)
       .post('/users/user')
       .send(
@@ -130,44 +131,43 @@ describe('POST /users/user', function(){
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
-        expect(res.body).to.have.property('user');
         done();
       });
   });
 });
 
 describe('GET /users/:username/profile', function () {
-  let testUser = new User({
-    name: 'jon doe',
-    email: 'jdoe@test.com',
-    username: 'jdoe',
-    password: 'password'
-  });
+  let testUser;
 
   before( function (done) {
     User.remove({}, function (err) {
       if (err) { console.log(err); }
     });
-    
-    User.addUser(testUser, function (err, user) {
+    let userData = {
+      name: 'jon doe',
+      email: 'jdoe@test.com',
+      username: 'jdoe',
+      password: 'password'
+    };
+    usersController.addUser(new User( userData ), function (err, user) {
       if (err) { console.log(err); }
-      testUser._id = user._id;
-    });    
-    testUser.token = jwt.sign(testUser, database.secret,{
-      expiresIn: 3600
-    });   
-    done();
+      testUser = user;
+      testUser.token = jwt.sign(testUser.username, database.secret);
+      done();    
+    });
+    
   });
 
   it('should respond with user profile data', function (done) {
-    let url = '/users/' + testUser.username + '/profile';
+    let url = '/users/${testUser.username}/profile';
     chai.request(server)
       .get(url)
       .set('Authorization', 'JWT ' + testUser.token)
       .end( function (err, res) {
-        console.log(res.body);
         expect(err).to.be.null;
         expect(res).to.have.status(200);
+        expect(res.body).to.have.property('username', 'jdoe');
+        expect(res.body).to.have.property('_id', testUser._id);
         done();
       });
   });

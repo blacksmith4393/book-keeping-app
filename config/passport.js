@@ -1,7 +1,7 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const database = require('../config/database');
-const User = require('../app/models/user');
+const usersController = require('../app/controllers/users-controller');
 
 
 module.exports = function(passport) {
@@ -9,7 +9,7 @@ module.exports = function(passport) {
   opts.jwtFromRequest = ExtractJwt.fromAuthHeader(); 
   opts.secretOrKey = database.secret;
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    User.getUserById(jwt_payload._doc._id, (err, user)=> {
+    usersController.getUserById(jwt_payload._doc._id, (err, user)=> {
       if (err) { 
         return done(err, false);
       }
